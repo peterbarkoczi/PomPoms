@@ -35,6 +35,4 @@ public class LoginPage extends Page {
         fillInputField(usernameInput, username);
         fillInputField(passwordInput, password);
     }
-
-
 }

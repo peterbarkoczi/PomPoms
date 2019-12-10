@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class BaseTest {
-
     WebDriver driver;
     String baseUrl;
     String username;
@@ -31,13 +30,7 @@ public class BaseTest {
         driver.quit();
     }
 
-    @Test
-    void test() {
-        driver.get("https://www.google.com");
-    }
-
     void navigateTo(String url) {
         driver.get(url);
     }
-
 }
