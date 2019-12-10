@@ -3,7 +3,6 @@ import POM.LoginPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,7 +10,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class LoginTest extends BaseTest {
-
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
     private String url;
@@ -28,19 +26,14 @@ public class LoginTest extends BaseTest {
         dashboardPage = new DashboardPage(driver);
     }
 
-    @Test
-    void testSuccessfulLoginToJira() {
-        loginPage.login(username, password);
-        Assertions.assertEquals(
-                username,
-                dashboardPage.getUsernameFromAvatar());
-    }
-
     @ParameterizedTest(name = "failed login test {index}: username = \"{0}\", password = \"{1}\", expected result = \"{2}\"")
     @MethodSource("getParametersForLoginTest")
-    void testFailedLoginToJira(String username, String password, boolean expectedResult) {
+    void testLoginToJira(String username, String password, boolean expectedResult) {
         loginPage.login(username, password);
-        Assertions.assertEquals(expectedResult, dashboardPage.isLogoutButtonPresent());
+        Assertions.assertEquals(
+                expectedResult,
+                dashboardPage.isLogoutButtonPresent()
+        );
     }
 
     private Stream<Arguments> getParametersForLoginTest() {
@@ -52,5 +45,4 @@ public class LoginTest extends BaseTest {
                 Arguments.of("", "", false)
         );
     }
-
 }
