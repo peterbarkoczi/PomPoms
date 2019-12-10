@@ -4,18 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
 
 public class DashboardPage extends Page {
 
     @FindBy(id = "header-details-user-fullname")
     private WebElement avatar;
 
-    @FindBy(id = "log_out")
-    private List<WebElement> logoutButtons;
-
     public DashboardPage(WebDriver driver) {
         super(driver);
+        this.url = "secure/Dashboard.jspa";
     }
 
     public String getUsernameFromAvatar() {
@@ -24,6 +21,10 @@ public class DashboardPage extends Page {
 
     public boolean isLogoutButtonPresent() {
         return logoutButtons.size() > 0;
+    }
+
+    public void clickOnAvatar() {
+        clickOnButton(avatar);
     }
 
 }
