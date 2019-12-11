@@ -26,7 +26,7 @@ public class CreateIssueTest extends BaseTest {
     }
 
     @ParameterizedTest(name = "Create issue test {index}")
-    @MethodSource("generateUUID")
+    @MethodSource("generateArgumentsForSimpleCreateIssueTest")
     void testCreateIssue(String summary) {
         Assertions.assertEquals(
                 summary,
@@ -36,10 +36,13 @@ public class CreateIssueTest extends BaseTest {
         );
     }
 
-    private Stream<Arguments> generateUUID() {
-        return Stream.of(
-                Arguments.of(UUID.randomUUID().toString())
-        );
+    private String getUUID() {
+        return UUID.randomUUID().toString();
     }
 
+    private Stream<Arguments> generateArgumentsForSimpleCreateIssueTest() {
+        return Stream.of(
+                Arguments.of(getUUID())
+        );
+    }
 }
