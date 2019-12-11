@@ -34,6 +34,7 @@ public class LoginPage extends Page {
 
     private void fillCredentials(String username, String password) {
         fillInputField(usernameInput, username);
+        passwordInput.click();
         fillInputField(passwordInput, password);
     }
 }
