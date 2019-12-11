@@ -10,6 +10,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class BaseTest {
 
     WebDriver driver;
+
+    // POM PAGES
+    LoginPage loginPage;
+    DashboardPage dashboardPage;
+
+    // CREDENTIALS
     String baseUrl;
     String username;
     String password;
@@ -25,9 +31,15 @@ public class BaseTest {
 
     @BeforeEach
     void setDriver() {
+        // TODO: Drivers util class, getChromeDriver method + other browsers
         System.setProperty("webdriver.chrome.driver", Util.getDriverPath("chromedriver"));
         this.driver = new ChromeDriver();
         driver.manage().window().maximize();
+
+        loginPage = new LoginPage(driver);
+        dashboardPage = new DashboardPage(driver);
+        navigateTo(baseUrl + loginPage.getUrl());
+
     }
 
     @AfterEach

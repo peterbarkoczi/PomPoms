@@ -23,10 +23,6 @@ public class LoginPage extends Page {
         this.url = "secure/Dashboard.jspa";
     }
 
-    public String getUrl() {
-        return this.url;
-    }
-
     public void login(String username, String password) {
         fillCredentials(username, password);
         clickOnLoginButton();
