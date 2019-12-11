@@ -19,8 +19,6 @@ public class BaseTest {
     String baseUrl;
     String username;
     String password;
-    LoginPage loginPage;
-    DashboardPage dashboardPage;
 
     @BeforeAll
     void setupTestEnvironment() {
