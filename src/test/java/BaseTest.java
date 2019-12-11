@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class BaseTest {
+
     WebDriver driver;
 
     // POM PAGES
@@ -18,6 +19,8 @@ public class BaseTest {
     String baseUrl;
     String username;
     String password;
+    LoginPage loginPage;
+    DashboardPage dashboardPage;
 
     @BeforeAll
     void setupTestEnvironment() {
