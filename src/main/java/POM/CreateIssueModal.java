@@ -50,6 +50,7 @@ public class CreateIssueModal extends Modal {
     }
 
     private void selectIssueType(String issueType) {
+        this.summaryInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
         selectInput(issueTypeInput, issueType);
     }
 
