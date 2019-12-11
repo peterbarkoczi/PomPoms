@@ -85,8 +85,8 @@ public abstract class Page {
     }
 
     public void openNewTab(String url) {
-        body.sendKeys(Keys.CONTROL + "t");
-        ((JavascriptExecutor) driver).executeScript("window.open('" + url + "')");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.open('" + url + "')");
     }
 
     public void changeTab(int numberOfTab) {
