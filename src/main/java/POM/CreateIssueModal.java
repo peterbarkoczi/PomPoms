@@ -1,11 +1,17 @@
 package POM;
 
+import com.google.common.collect.Lists;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
+
+import static org.openqa.selenium.By.cssSelector;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class CreateIssueModal extends Modal {
 
@@ -45,11 +51,12 @@ public class CreateIssueModal extends Modal {
         inputField.sendKeys(Keys.ENTER);
     }
 
-    private void selectProject(String project) {
+    public void selectProject(String project) {
         selectInput(projectInput, project);
     }
 
     private void selectIssueType(String issueType) {
+        this.issueTypeInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
         selectInput(issueTypeInput, issueType);
     }
 
@@ -60,10 +67,25 @@ public class CreateIssueModal extends Modal {
     }
 
     private void clickOnCreateButton() {
-        clickOnButton(submitButton);
+        clickOn(submitButton);
     }
 
     private void clickOnCancelButton() {
-        clickOnButton(cancelButton);
+        clickOn(cancelButton);
+    }
+
+    public void clickOnIssueTypesDropdown() {
+        this.issueTypeInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
+        clickOn(issueTypeInput);
+    }
+
+    public List<String> getAvailableIssueTypes() {
+        clearInputField(issueTypeInput);
+        clickOn(issueTypeInput);
+        WebElement dropdown = wait.until(visibilityOfElementLocated(
+                cssSelector("div[class='ajs-layer box-shadow active']")
+        ));
+        List<WebElement> dropdownElements = dropdown.findElements(cssSelector("a"));
+        return Lists.transform(dropdownElements, WebElement::getText);
     }
 }

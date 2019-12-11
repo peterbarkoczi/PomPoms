@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class Modal extends Page {
+    private boolean isSubmitted;
 
     @FindBy(className = "jira-dialog")
     WebElement dialogPanel;
@@ -17,5 +18,19 @@ public class Modal extends Page {
 
     public Modal(WebDriver driver) {
         super(driver);
+        this.isSubmitted = false;
+    }
+
+    public void submit() {
+        clickOn(submitButton);
+        this.isSubmitted = true;
+    }
+
+    public void cancel() {
+        clickOn(cancelButton);
+    }
+
+    public boolean isSubmitted() {
+        return this.isSubmitted;
     }
 }

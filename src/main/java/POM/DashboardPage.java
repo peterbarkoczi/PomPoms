@@ -24,7 +24,7 @@ public class DashboardPage extends Page {
     }
 
     public void clickOnAvatar() {
-        clickOnButton(avatar);
+        clickOn(avatar);
     }
 
 }

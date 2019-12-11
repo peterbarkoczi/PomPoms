@@ -27,8 +27,8 @@ public class IssuePage extends Page {
     }
 
     public void deleteIssue() {
-        clickOnButton(moreButton);
-        clickOnButton(deleteButton);
+        clickOn(moreButton);
+        clickOn(deleteButton);
         wait.until(visibilityOfElementLocated(By.id("delete-issue-submit"))).click();
     }
 }
