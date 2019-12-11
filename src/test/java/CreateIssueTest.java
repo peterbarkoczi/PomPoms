@@ -1,4 +1,6 @@
 import POM.CreateIssueModal;
+import POM.IssuePage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,12 +19,20 @@ public class CreateIssueTest extends BaseTest {
         this.createIssueModal = new CreateIssueModal(driver);
     }
 
+    @AfterEach
+    void resetTestData() {
+        IssuePage issue = new IssuePage(driver);
+        issue.deleteIssue();
+    }
+
     @ParameterizedTest(name = "Create issue test {index}")
     @MethodSource("generateUUID")
     void testCreateIssue(String summary) {
         Assertions.assertEquals(
                 summary,
-                dashboardPage.createIssue("Main Testing Project", "", summary).getSummary()
+                dashboardPage
+                        .createIssue("Main Testing Project", "", summary)
+                        .getSummary()
         );
     }
 
