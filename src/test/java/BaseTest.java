@@ -1,3 +1,4 @@
+import POM.BrowseProjectsPage;
 import POM.DashboardPage;
 import POM.LoginPage;
 import Utils.Util;
@@ -14,6 +15,7 @@ public class BaseTest {
     // POM PAGES
     LoginPage loginPage;
     DashboardPage dashboardPage;
+    BrowseProjectsPage browseProjectsPage;
 
     // CREDENTIALS
     String baseUrl;
@@ -36,6 +38,7 @@ public class BaseTest {
 
         loginPage = new LoginPage(driver);
         dashboardPage = new DashboardPage(driver);
+        browseProjectsPage = new BrowseProjectsPage(driver);
         navigateTo(baseUrl + loginPage.getUrl());
 
     }
