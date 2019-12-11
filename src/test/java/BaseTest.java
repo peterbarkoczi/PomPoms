@@ -1,3 +1,5 @@
+import POM.DashboardPage;
+import POM.LoginPage;
 import Utils.Util;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -6,10 +8,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class BaseTest {
+
     WebDriver driver;
     String baseUrl;
     String username;
     String password;
+    LoginPage loginPage;
+    DashboardPage dashboardPage;
 
     @BeforeAll
     void setupTestEnvironment() {

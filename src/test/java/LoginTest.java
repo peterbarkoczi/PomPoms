@@ -21,9 +21,9 @@ public class LoginTest extends BaseTest {
 
     @BeforeEach
     void navigate() {
-        navigateTo(baseUrl + url);
         loginPage = new LoginPage(driver);
         dashboardPage = new DashboardPage(driver);
+        navigateTo(baseUrl + loginPage.getUrl());
     }
 
     @ParameterizedTest(name = "failed login test {index}: username = \"{0}\", password = \"{1}\", expected result = \"{2}\"")
