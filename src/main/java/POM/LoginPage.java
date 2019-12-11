@@ -20,6 +20,7 @@ public class LoginPage extends Page {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        this.url = "secure/Dashboard.jspa";
     }
 
     public void login(String username, String password) {
