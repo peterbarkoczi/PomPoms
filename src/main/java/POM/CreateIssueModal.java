@@ -32,7 +32,7 @@ public class CreateIssueModal extends Modal {
      *                  Apply empty string ("") if default value shall be used.
      * @param summary Text to be typed into Summary input field.
      */
-    public void fillCreateIssueModal(String project, String issueType, String summary) {
+    public void fillAndSaveIssue(String project, String issueType, String summary) {
         if (!project.equals("")) selectProject(project);
         if (!issueType.equals("")) selectIssueType(issueType);
         fillSummaryInput(summary);
@@ -54,6 +54,7 @@ public class CreateIssueModal extends Modal {
     }
 
     private void fillSummaryInput(String summary) {
+        // TODO: ask on review
         this.summaryInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("summary")));
         fillInputField(summaryInput, summary);
     }

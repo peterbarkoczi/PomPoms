@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
@@ -51,20 +50,17 @@ public abstract class Page {
      * <p>Creates a new issue with the given parameters.</p>
      * <p>Apply empty string ("") if the input field is supposed
      * to be skipped or default value should be used.</p>
-     * <p>Random UUID is used if '<b>random</b>' keyword
-     * is passed for the 'summary' parameter.</p>
      *
      * @param project Name of the Project as displayed in the dropdown.
      * @param issueType Name of the Issue Type as displayed in the dropdown.
      * @param summary Text to be typed into Summary input field.
      */
-    public String createIssue(String project, String issueType, String summary) {
-        if (summary.equals("random"))
-            summary = UUID.randomUUID().toString();
+    public IssuePage createIssue(String project, String issueType, String summary) {
         clickOnButton(createButton);
         CreateIssueModal modal = new CreateIssueModal(driver);
-        modal.fillCreateIssueModal(project, issueType, summary);
-        return summary;
+        modal.fillAndSaveIssue(project, issueType, summary);
+        modal.catchPopup();
+        return new IssuePage(driver);
     }
 
     public String catchPopup() {
@@ -85,8 +81,8 @@ public abstract class Page {
     }
 
     public void openNewTab(String url) {
-        body.sendKeys(Keys.CONTROL + "t");
-        ((JavascriptExecutor) driver).executeScript("window.open('" + url + "')");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.open('" + url + "')");
     }
 
     public void changeTab(int numberOfTab) {
