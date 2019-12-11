@@ -2,7 +2,6 @@ package POM;
 
 import com.google.common.collect.Lists;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,18 +10,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 import static org.openqa.selenium.By.cssSelector;
+import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class CreateIssueModal extends Modal {
 
     @FindBy(id = "project-field")
     private WebElement projectInput;
-
-    @FindBy(id = "issuetype-field")
-    private WebElement issueTypeInput;
-
-    @FindBy(id = "summary")
-    private WebElement summaryInput;
 
     public CreateIssueModal(WebDriver driver) {
         super(driver);
@@ -45,33 +39,8 @@ public class CreateIssueModal extends Modal {
         clickOnCreateButton();
     }
 
-    private void selectInput(WebElement inputField, String input) {
-        inputField.click();
-        inputField.sendKeys(input);
-        inputField.sendKeys(Keys.ENTER);
-    }
-
     public void selectProject(String project) {
         selectInput(projectInput, project);
-    }
-
-    private void selectIssueType(String issueType) {
-        this.issueTypeInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
-        selectInput(issueTypeInput, issueType);
-    }
-
-    private void fillSummaryInput(String summary) {
-        // TODO: ask on review
-        this.summaryInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("summary")));
-        fillInputField(summaryInput, summary);
-    }
-
-    private void clickOnCreateButton() {
-        clickOn(submitButton);
-    }
-
-    private void clickOnCancelButton() {
-        clickOn(cancelButton);
     }
 
     public void clickOnIssueTypesDropdown() {
@@ -83,7 +52,7 @@ public class CreateIssueModal extends Modal {
         clearInputField(issueTypeInput);
         clickOn(issueTypeInput);
         WebElement dropdown = wait.until(visibilityOfElementLocated(
-                cssSelector("div[class='ajs-layer box-shadow active']")
+                id("issuetype-suggestions")
         ));
         List<WebElement> dropdownElements = dropdown.findElements(cssSelector("a"));
         return Lists.transform(dropdownElements, WebElement::getText);

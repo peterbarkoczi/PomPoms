@@ -23,7 +23,7 @@ public class CreateIssueTest extends BaseTest {
 
     @AfterEach
     void resetTestData() {
-        if (createIssueModal.isSubmitted()) {
+        if (!createIssueModal.isCanceled()) {
             IssuePage issue = new IssuePage(driver);
             issue.deleteIssue();
         }
@@ -40,16 +40,20 @@ public class CreateIssueTest extends BaseTest {
         );
     }
 
+    private Stream<Arguments> generateArgumentsForSimpleCreateIssueTest() {
+        return Stream.of(Arguments.of(getUUID()));
+    }
+
     @ParameterizedTest(name = "test available issue types {index}: {0}")
     @MethodSource("generateParametersForAvailableIssueTypesTest")
     void testAvailableIssueTypes(String project, List<String> expectedIssueTypes) {
-        CreateIssueModal modal = dashboardPage.initiateCreateIssue();
-        modal.selectProject(project);
-        modal.clickOnIssueTypesDropdown();
+        createIssueModal = dashboardPage.initiateCreateIssue();
+        createIssueModal.selectProject(project);
+        createIssueModal.clickOnIssueTypesDropdown();
         Assertions.assertTrue(
-                modal.getAvailableIssueTypes()
+                createIssueModal.getAvailableIssueTypes()
                         .containsAll(expectedIssueTypes));
-        modal.cancel();
+        createIssueModal.cancel();
     }
 
     private Stream<Arguments> generateParametersForAvailableIssueTypesTest() {
@@ -65,12 +69,55 @@ public class CreateIssueTest extends BaseTest {
         return stream.build();
     }
 
+    @ParameterizedTest(name = "test sub-tasks {index}: project = \"{0}\", issue type = \"{1}\"")
+    @MethodSource("generateParametersForSubTaskTest")
+    void testIsSubTaskCreatable(String project, String issueType, String summary) {
+        IssuePage issue = dashboardPage.createIssue(project, issueType, summary);
+        issue.createSubTask(summary);
+        Assertions.assertTrue(issue.doesSubTaskListContainSubTaskWithSummary(summary));
+    }
+
+    private Stream<Arguments> generateParametersForSubTaskTest() {
+        List<String> projects = Arrays.asList("TOUCAN", "JETI", "COALA");
+        List<String> issueTypes = Arrays.asList("Story", "Task", "Bug");
+        Stream.Builder<Arguments> stream = Stream.builder();
+
+        for (String project : projects) {
+            for (String issueType : issueTypes) {
+                stream.add(Arguments.of(
+                        project, issueType, getUUID()
+                ));
+            }
+        }
+        return stream.build();
+    }
+
+//    @ParameterizedTest(name = "Create issue test {index} for project \"{0}\" and issue type \"{1}\"")
+//    @MethodSource("generateArgumentsForComplexCreateIssueTest")
+//    void testCreateIssue(String project, String issueType, String summary) {
+//        Assertions.assertEquals(
+//                summary,
+//                dashboardPage
+//                        .createIssue(project, issueType, summary)
+//                        .getSummary());
+//    }
+//
+//    private Stream<Arguments> generateArgumentsForComplexCreateIssueTest() {
+//        List<String> projects = Arrays.asList("TOUCAN", "JETI", "COALA");
+//        List<String> issueTypes = Arrays.asList("Story", "Task", "Bug");
+//        Stream.Builder<Arguments> stream = Stream.builder();
+//
+//        for (String project : projects) {
+//            for (String issueType : issueTypes) {
+//                stream.add(Arguments.of(
+//                        project, issueType, getUUID()
+//                ));
+//            }
+//        }
+//        return stream.build();
+//    }
+
     private String getUUID() {
         return UUID.randomUUID().toString();
     }
-
-    private Stream<Arguments> generateArgumentsForSimpleCreateIssueTest() {
-        return Stream.of(Arguments.of(getUUID()));
-    }
-
 }
