@@ -34,8 +34,8 @@ public class DashboardPage extends Page {
     }
 
     public void navigateToAllProjectsPage() {
-        clickOnButton(projectsButton);
-        clickOnButton(viewAllProjectsButton);
+        clickOn(projectsButton);
+        clickOn(viewAllProjectsButton);
     }
 
 }

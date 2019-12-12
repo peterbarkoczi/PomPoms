@@ -2,7 +2,10 @@ import POM.BrowseProjectsPage;
 import POM.DashboardPage;
 import POM.LoginPage;
 import Utils.Util;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -40,7 +43,6 @@ public class BaseTest {
         dashboardPage = new DashboardPage(driver);
         browseProjectsPage = new BrowseProjectsPage(driver);
         navigateTo(baseUrl + loginPage.getUrl());
-
     }
 
     @AfterEach
