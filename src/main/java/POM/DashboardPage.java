@@ -38,4 +38,7 @@ public class DashboardPage extends Page {
         clickOn(viewAllProjectsButton);
     }
 
+    public WebElement getAvatar() {
+        return avatar;
+    }
 }
