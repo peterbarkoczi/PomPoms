@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ public abstract class Page {
     WebDriver driver;
     WebDriverWait wait;
     String url;
+
+    @FindBy(css = "#user-options > a")
+    WebElement userOptionsLink;
 
     @FindBy(id = "log_out")
     List<WebElement> logoutButtons;
@@ -93,5 +97,9 @@ public abstract class Page {
     public void changeTab(int numberOfTab) {
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(numberOfTab - 1));
+    }
+
+    public Boolean isTestUserLoggedIn(String username) {
+        return wait.until(ExpectedConditions.attributeToBe(userOptionsLink, "data-username", username));
     }
 }

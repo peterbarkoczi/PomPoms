@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class LoginTest extends BaseTest {
-
     private String url;
 
     @BeforeAll
