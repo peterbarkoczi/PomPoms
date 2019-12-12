@@ -32,11 +32,12 @@ public class LoginPage extends Page {
     }
 
     private void clickOnLoginButton() {
-        clickOnButton(loginButton);
+        clickOn(loginButton);
     }
 
     private void fillCredentials(String username, String password) {
         fillInputField(usernameInput, username);
+        passwordInput.click();
         fillInputField(passwordInput, password);
     }
 }
