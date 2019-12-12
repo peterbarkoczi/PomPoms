@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class IssuePage extends Page {
 
     @FindBy(id = "view-subtasks")
     WebElement subTaskList;
+
+    @FindBy(id = "edit-issue")
+    WebElement editButton;
 
     public IssuePage(WebDriver driver) {
         super(driver);
@@ -56,5 +60,13 @@ public class IssuePage extends Page {
 
     public boolean doesSubTaskListContainSubTaskWithSummary(String summary) {
         return getSubTaskSummaries().contains(summary);
+    }
+
+    public void clickOnEditButton() {
+        clickOn(editButton);
+    }
+
+    public void waitForSuccessMessage() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("aui-message-success")));
     }
 }
