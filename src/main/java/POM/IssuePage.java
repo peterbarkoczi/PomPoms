@@ -13,6 +13,9 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class IssuePage extends Page {
 
+    @FindBy(id = "key-val")
+    WebElement issueKey;
+
     @FindBy(id = "summary-val")
     WebElement summary;
 
@@ -33,6 +36,7 @@ public class IssuePage extends Page {
 
     public IssuePage(WebDriver driver) {
         super(driver);
+        this.url = "browse/";
     }
 
     public String getSummary() {
@@ -68,5 +72,9 @@ public class IssuePage extends Page {
 
     public void waitForSuccessMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("aui-message-success")));
+    }
+
+    public String getIssueKey() {
+        return issueKey.getText();
     }
 }

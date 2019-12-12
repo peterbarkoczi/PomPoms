@@ -1,4 +1,3 @@
-import POM.BrowseProjectsPage;
 import POM.DashboardPage;
 import POM.LoginPage;
 import Utils.Util;
@@ -10,26 +9,34 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.Arrays;
+import java.util.List;
+
 @TestInstance(Lifecycle.PER_CLASS)
 public class BaseTest {
-
     WebDriver driver;
 
     // POM PAGES
     LoginPage loginPage;
     DashboardPage dashboardPage;
-    BrowseProjectsPage browseProjectsPage;
 
     // CREDENTIALS
-    String baseUrl;
     String username;
     String password;
 
+    // TEST DATA
+    String baseUrl;
+    List<String> projects;
+    List<String> issueTypes;
+
     @BeforeAll
     void setupTestEnvironment() {
-        this.baseUrl = "https://jira.codecool.codecanvas.hu/";
         this.username = System.getenv("JIRA_USERNAME");
         this.password = System.getenv("JIRA_PASSWORD");
+
+        this.baseUrl = "https://jira.codecool.codecanvas.hu/";
+        projects = Arrays.asList("TOUCAN", "JETI", "COALA");
+        issueTypes = Arrays.asList("Story", "Task", "Bug");
     }
 
     @BeforeEach
@@ -41,7 +48,6 @@ public class BaseTest {
 
         loginPage = new LoginPage(driver);
         dashboardPage = new DashboardPage(driver);
-        browseProjectsPage = new BrowseProjectsPage(driver);
         navigateTo(baseUrl + loginPage.getUrl());
     }
 

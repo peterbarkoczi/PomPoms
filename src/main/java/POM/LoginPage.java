@@ -4,7 +4,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends Page {
 
@@ -22,7 +21,7 @@ public class LoginPage extends Page {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        this.url = "secure/Dashboard.jspa";
+        url = "secure/Dashboard.jspa";
     }
 
     public void login(String username, String password) {
