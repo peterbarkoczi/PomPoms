@@ -22,7 +22,7 @@ public class EditIssueTest extends BaseTest {
 
     @AfterEach
     void resetTestData() {
-        issue.deleteIssue();
+        if (!editIssueModal.isCanceled()) issue.deleteIssue();
     }
 
     @ParameterizedTest
@@ -40,7 +40,7 @@ public class EditIssueTest extends BaseTest {
         navigateTo("https://jira.codecool.codecanvas.hu/browse/MTP-154");
         String summary = issue.getSummary();
         issue.clickOnEditButton();
-        editIssueModal.fillAndCancelUpdating("updated summary");
+        editIssueModal.fillAndCancelEditing("updated summary");
         driver.switchTo().alert().accept();
         Assertions.assertEquals(summary, issue.getSummary());
     }

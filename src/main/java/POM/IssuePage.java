@@ -63,7 +63,7 @@ public class IssuePage extends Page {
     }
 
     public void clickOnEditButton() {
-        clickOnButton(editButton);
+        clickOn(editButton);
     }
 
     public void waitForSuccessMessage() {

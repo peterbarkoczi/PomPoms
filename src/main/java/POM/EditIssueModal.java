@@ -7,9 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class EditIssueModal extends Modal {
 
-    @FindBy(id = "summary")
-    private WebElement summaryInput;
-
     @FindBy(id = "edit-issue-submit")
     private WebElement updateButton;
 
@@ -22,9 +19,9 @@ public class EditIssueModal extends Modal {
         clickOnUpdateButton();
     }
 
-    public void fillAndCancelUpdating(String inputText) {
+    public void fillAndCancelEditing(String inputText) {
         fillSummaryInputField(inputText);
-        clickOnCancelButton();
+        cancel();
     }
 
     private void fillSummaryInputField(String inputText) {
@@ -33,10 +30,7 @@ public class EditIssueModal extends Modal {
     }
 
     private void clickOnUpdateButton() {
-        clickOnButton(updateButton);
+        clickOn(updateButton);
     }
 
-    private void clickOnCancelButton() {
-        clickOnButton(cancelButton);
-    }
 }
