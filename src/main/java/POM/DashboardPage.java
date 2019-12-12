@@ -27,4 +27,7 @@ public class DashboardPage extends Page {
         clickOnButton(avatar);
     }
 
+    public WebElement getAvatar() {
+        return avatar;
+    }
 }

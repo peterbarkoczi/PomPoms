@@ -18,12 +18,17 @@ public class EditIssueModal extends Modal {
     }
 
     public void fillAndUpdateSummary(String inputText) {
-        wait.until(ExpectedConditions.visibilityOf(summaryInput));
         fillSummaryInputField(inputText);
         clickOnUpdateButton();
     }
 
+    public void fillAndCancelUpdating(String inputText) {
+        fillSummaryInputField(inputText);
+        clickOnCancelButton();
+    }
+
     private void fillSummaryInputField(String inputText) {
+        wait.until(ExpectedConditions.visibilityOf(summaryInput));
         fillInputField(summaryInput, inputText);
     }
 
@@ -31,4 +36,7 @@ public class EditIssueModal extends Modal {
         clickOnButton(updateButton);
     }
 
+    private void clickOnCancelButton() {
+        clickOnButton(cancelButton);
+    }
 }

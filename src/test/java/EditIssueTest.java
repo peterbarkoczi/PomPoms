@@ -4,6 +4,7 @@ import POM.IssuePage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -34,4 +35,13 @@ public class EditIssueTest extends BaseTest {
         Assertions.assertEquals(inputText, issue.getSummary());
     }
 
+    @Test
+    void testAbortEditingWithCancel() {
+        navigateTo("https://jira.codecool.codecanvas.hu/browse/MTP-154");
+        String summary = issue.getSummary();
+        issue.clickOnEditButton();
+        editIssueModal.fillAndCancelUpdating("updated summary");
+        driver.switchTo().alert().accept();
+        Assertions.assertEquals(summary, issue.getSummary());
+    }
 }
