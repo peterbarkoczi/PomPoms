@@ -9,15 +9,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 public class VersionsWithGlassTest extends BaseTest {
 
-    GlassDocumentationPage glassDocumentationPage;
-    ProjectSettingsPage projectSettingsPage;
-    VersionsPage versionsPage;
+    private GlassDocumentationPage glassDocumentationPage;
+    private VersionsPage versionsPage;
 
     @BeforeEach
     void setup() {
-        glassDocumentationPage = new GlassDocumentationPage(driver);
-        projectSettingsPage = new ProjectSettingsPage(driver);
-        versionsPage = new VersionsPage(driver);
         loginPage.login(username, password);
         navigateTo("https://jira.codecool.codecanvas.hu/projects/PP5?selectedItem=com.codecanvas.glass:glass");
     }
@@ -32,8 +28,10 @@ public class VersionsWithGlassTest extends BaseTest {
     @CsvSource({"new-test-version"})
     void testCompareGlassVersionsWithProjectVersions(String versionName) {
         navigateTo("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP5/administer-versions?status=unreleased");
+        this.versionsPage = new VersionsPage(driver);
         versionsPage.createNewVersion(versionName);
         navigateTo("https://jira.codecool.codecanvas.hu/projects/PP5?selectedItem=com.codecanvas.glass:glass");
+        this.glassDocumentationPage = new GlassDocumentationPage(driver);
         glassDocumentationPage.clickOnVersionsTab();
         Assertions.assertTrue(glassDocumentationPage.validateCreatedVersion(versionName));
     }
