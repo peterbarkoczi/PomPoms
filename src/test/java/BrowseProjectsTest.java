@@ -7,8 +7,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class BrowseProjectsTest extends BaseTest {
     BrowseProjectsPage browseProjectsPage;
 
-    BrowseProjectsPage browseProjectsPage;
-
     @BeforeEach
     void navigateToDashboard() {
         browseProjectsPage = new BrowseProjectsPage(driver);
