@@ -1,10 +1,6 @@
 package POM;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -42,8 +38,12 @@ public abstract class Page {
         inputField.sendKeys(inputText);
     }
 
-    void clickOnButton(WebElement button) {
-        button.click();
+    void clearInputField(WebElement inputField) {
+        inputField.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
+    }
+
+    void clickOn(WebElement webElement) {
+        webElement.click();
     }
 
     /**
@@ -56,11 +56,16 @@ public abstract class Page {
      * @param summary Text to be typed into Summary input field.
      */
     public IssuePage createIssue(String project, String issueType, String summary) {
-        clickOnButton(createButton);
+        clickOn(createButton);
         CreateIssueModal modal = new CreateIssueModal(driver);
         modal.fillAndSaveIssue(project, issueType, summary);
         modal.catchPopup();
         return new IssuePage(driver);
+    }
+
+    public CreateIssueModal initiateCreateIssue() {
+        clickOn(createButton);
+        return new CreateIssueModal(driver);
     }
 
     public String catchPopup() {
@@ -77,7 +82,7 @@ public abstract class Page {
     }
   
     public void clickOnLogoutButton() {
-        clickOnButton(logoutButtons.get(0));
+        clickOn(logoutButtons.get(0));
     }
 
     public void openNewTab(String url) {
