@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -57,9 +56,6 @@ public class CreateIssueTest extends BaseTest {
     }
 
     private Stream<Arguments> generateParametersForAvailableIssueTypesTest() {
-        List<String> projects = Arrays.asList("TOUCAN", "JETI", "COALA");
-        List<String> issueTypes = Arrays.asList("Story", "Task", "Bug");
-
         Stream.Builder<Arguments> stream = Stream.builder();
         for (String project : projects) {
             stream.add(Arguments.of(
@@ -78,10 +74,7 @@ public class CreateIssueTest extends BaseTest {
     }
 
     private Stream<Arguments> generateParametersForSubTaskTest() {
-        List<String> projects = Arrays.asList("TOUCAN", "JETI", "COALA");
-        List<String> issueTypes = Arrays.asList("Story", "Task", "Bug");
         Stream.Builder<Arguments> stream = Stream.builder();
-
         for (String project : projects) {
             for (String issueType : issueTypes) {
                 stream.add(Arguments.of(
