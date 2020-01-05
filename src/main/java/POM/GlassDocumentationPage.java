@@ -42,6 +42,7 @@ public class GlassDocumentationPage extends Page {
     }
 
     private WebElement getValueOfLabel(WebElement label) {
+        // TODO: concat into 1 xpath
         return label.findElement(By.xpath("./..")).findElement(By.className("glass-meta-value"));
     }
 

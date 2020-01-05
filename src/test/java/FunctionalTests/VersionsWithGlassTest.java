@@ -1,5 +1,6 @@
+package FunctionalTests;
+
 import POM.GlassDocumentationPage;
-import POM.ProjectSettingsPage;
 import POM.VersionsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;

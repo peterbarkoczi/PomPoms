@@ -44,6 +44,7 @@ public class CreateIssueModal extends Modal {
     }
 
     public void clickOnIssueTypesDropdown() {
+        // todo: 1st wait for invisibility
         this.issueTypeInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
         clickOn(issueTypeInput);
     }

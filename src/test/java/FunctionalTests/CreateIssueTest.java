@@ -1,3 +1,5 @@
+package FunctionalTests;
+
 import POM.CreateIssueModal;
 import POM.IssuePage;
 import org.junit.jupiter.api.AfterEach;

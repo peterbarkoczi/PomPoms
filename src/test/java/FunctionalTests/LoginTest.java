@@ -1,3 +1,5 @@
+package FunctionalTests;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +22,7 @@ public class LoginTest extends BaseTest {
         navigateTo(baseUrl + loginPage.getUrl());
     }
 
-    @ParameterizedTest(name = "failed login test {index}: username = \"{0}\", password = \"{1}\", expected result = \"{2}\"")
+    @ParameterizedTest(name = "login test {index}: username = \"{0}\", password = \"{1}\", expected result = \"{2}\"")
     @MethodSource("getParametersForLoginTest")
     void testLoginToJira(String username, String password, boolean expectedResult) {
         loginPage.login(username, password);

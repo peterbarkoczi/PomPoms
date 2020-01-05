@@ -1,6 +1,7 @@
+package FunctionalTests;
+
 import POM.EditIssueModal;
 import POM.IssuePage;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

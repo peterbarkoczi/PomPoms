@@ -1,3 +1,5 @@
+package FunctionalTests;
+
 import POM.DashboardPage;
 import POM.LoginPage;
 import Utils.Util;
@@ -48,6 +50,10 @@ public class BaseTest {
 
         loginPage = new LoginPage(driver);
         dashboardPage = new DashboardPage(driver);
+    }
+
+    @BeforeEach
+    void visitLoginPage() {
         navigateTo(baseUrl + loginPage.getUrl());
     }
 
